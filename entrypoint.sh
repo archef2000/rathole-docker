@@ -57,7 +57,7 @@ function create_valid_service() {
     fi
     if [ -n "${!nodelay}" ]; then
       protocol=$(validate_boolean "${!nodelay}")
-      to_config "nodelay = \"${!nodelay}\""
+      to_config "nodelay = ${!nodelay}"
     fi
     if [[ -n "${!retry//[a-z,.]/}" && "${MODE}" == "client" ]]; then
       to_config "retry_interval = ${!retry//[a-z,.]/}"
