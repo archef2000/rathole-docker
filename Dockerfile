@@ -1,9 +1,8 @@
 FROM alpine:3.16 as downloader
-RUN arch=$(uname -m) \
-    && arch="${arch//v6/}" \
-    && arch="${arch%l}" \
-    && echo $arch \
-    && wget -O rathole.zip https://github.com/rapiz1/rathole/releases/download/v0.4.8/rathole-${arch}-unknown-linux-musl.zip \
+ARG VERSION=v0.4.8
+RUN base_url=https://github.com/rapiz1/rathole/releases/download/${VERSION}/ \
+    && file=$(case "$(uname -m)" in "x86_64") echo "rathole-x86_64-unknown-linux-gnu.zip";; "aarch64") echo "rathole-aarch64-unknown-linux-musl.zip";; "armv7l") echo "rathole-armv7-unknown-linux-musleabihf.zip";; "arm") echo "rathole-arm-unknown-linux-musleabihf.zip";; *);; esac)
+    && wget -O rathole.zip ${base_url}${file} \
     && unzip rathole.zip
 
 FROM alpine:3.16
