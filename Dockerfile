@@ -1,5 +1,5 @@
 FROM alpine:3.16 as downloader
-RUN wget -O rathole.zip https://github.com/rapiz1/rathole/releases/download/v0.4.8/rathole-aarch64-unknown-linux-musl.zip \
+RUN wget -O rathole.zip https://github.com/rapiz1/rathole/releases/download/v0.4.8/rathole-$(uname -m)-unknown-linux-musl.zip \
     && unzip rathole.zip
 
 FROM alpine:3.16
