@@ -1,5 +1,6 @@
 FROM alpine:3.16 as downloader
 RUN arch=$(uname -m) \
+    && arch="${arch//v6/}" \
     && wget -O rathole.zip https://github.com/rapiz1/rathole/releases/download/v0.4.8/rathole-${arch}-unknown-linux-musl.zip \
     && unzip rathole.zip
 
